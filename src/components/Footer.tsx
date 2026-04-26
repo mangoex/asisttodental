@@ -44,10 +44,10 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:hola@humanio.digital"
+                  href="mailto:contacto@humanio.digital"
                   className="hover:text-cream transition-colors"
                 >
-                  hola@humanio.digital
+                  contacto@humanio.digital
                 </a>
               </li>
             </ul>

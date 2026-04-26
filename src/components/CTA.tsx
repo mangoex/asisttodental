@@ -48,10 +48,10 @@ export default function CTA() {
             <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
           </a>
           <a
-            href="mailto:hola@humanio.digital?subject=Demo%20Asistto%20Dental"
+            href="mailto:contacto@humanio.digital?subject=Demo%20Asistto%20Dental"
             className="text-sm text-cream/60 hover:text-cream transition-colors underline-offset-4 hover:underline"
           >
-            o escribe a hola@humanio.digital
+            o escribe a contacto@humanio.digital
           </a>
         </div>
       </div>
