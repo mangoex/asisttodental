@@ -29,6 +29,11 @@ export const metadata: Metadata = {
   description:
     "Asistto Dental responde WhatsApp, agenda citas y trabaja por ti las 24 horas. Nunca pierdas un paciente por no contestar a tiempo.",
   metadataBase: new URL("https://asistto.humanio.digital"),
+  icons: {
+    icon: "/Asistto.png",
+    shortcut: "/Asistto.png",
+    apple: "/Asistto.png",
+  },
   openGraph: {
     title: "Asistto Dental — Tu asistente digital",
     description:
