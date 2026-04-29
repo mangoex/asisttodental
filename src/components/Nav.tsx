@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 const links = [
   { href: "#beneficios", label: "Beneficios" },
@@ -43,13 +42,11 @@ export default function Nav() {
           )}
         >
           <a href="#" className="flex items-center gap-2 font-display font-semibold text-cream">
-            <Image
-              src="/Asistto.png"
-              alt="Asistto Dental Logo"
-              width={24}
-              height={24}
-              className="w-6 h-6 object-contain"
+            <span
+              className="inline-block size-2 rounded-full bg-mint pulse-dot"
+              aria-hidden
             />
+            <span className="tracking-tight">Asistto</span>
             <span className="text-muted text-sm font-mono">/dental</span>
           </a>
 
