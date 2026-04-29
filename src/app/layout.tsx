@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     description: "Tu asistente digital 24/7 para clinicas dentales.",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
