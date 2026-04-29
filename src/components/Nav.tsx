@@ -70,11 +70,13 @@ export default function Nav() {
               Ver planes
             </a>
             <a
-              href="#demo"
+              href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+              target="_blank"
+              rel="noreferrer"
               data-cursor="cta"
               className="group relative inline-flex items-center gap-2 rounded-full bg-mint text-bg px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
             >
-              <span>Solicita demo gratis</span>
+              <span>Haz una prueba</span>
               <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
             </a>
           </div>
@@ -104,11 +106,13 @@ export default function Nav() {
               </a>
             ))}
             <a
-              href="#demo"
+              href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
               onClick={() => setOpen(false)}
+              target="_blank"
+              rel="noreferrer"
               className="rounded-full bg-mint text-bg px-5 py-2.5 text-center font-medium"
             >
-              Solicita demo gratis
+              Haz una prueba
             </a>
           </nav>
         </div>

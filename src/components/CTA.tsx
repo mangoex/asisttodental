@@ -38,13 +38,13 @@ export default function CTA() {
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://wa.me/5215555555555?text=Hola%2C%20quiero%20una%20demo%20de%20Asistto%20Dental"
+            href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
             target="_blank"
             rel="noreferrer"
             data-cursor="cta"
             className="group inline-flex items-center gap-3 rounded-full bg-mint text-bg px-8 py-4 text-base font-medium hover:scale-[1.02] transition-transform shadow-[0_0_60px_-10px_rgba(148,229,192,0.5)]"
           >
-            <span>Solicita demo gratis</span>
+            <span>Haz una prueba</span>
             <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
           </a>
           <a

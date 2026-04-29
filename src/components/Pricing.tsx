@@ -125,7 +125,9 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="#demo"
+                href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+                target="_blank"
+                rel="noreferrer"
                 data-cursor="cta"
                 className={cn(
                   "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium transition-all",
@@ -134,7 +136,7 @@ export default function Pricing() {
                     : "border border-line text-cream hover:border-cream/40 hover:bg-bg-elev"
                 )}
               >
-                <span>{p.cta}</span>
+                <span>Haz una prueba</span>
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
               </a>
             </motion.div>

@@ -128,11 +128,13 @@ export default function HeroScrub() {
               className="mt-10 flex flex-wrap items-center gap-4"
             >
               <a
-                href="#demo"
+                href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+                target="_blank"
+                rel="noreferrer"
                 data-cursor="cta"
                 className="group relative inline-flex items-center gap-3 rounded-full bg-mint text-bg px-7 py-4 text-base font-medium transition-transform hover:scale-[1.02] shadow-[0_0_60px_-10px_rgba(148,229,192,0.45)]"
               >
-                <span>Solicita demo gratis</span>
+                <span>Haz una prueba</span>
                 <span
                   aria-hidden
                   className="inline-block transition-transform group-hover:translate-x-1"
