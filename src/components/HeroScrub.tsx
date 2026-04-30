@@ -146,7 +146,7 @@ export default function HeroScrub() {
                 href="#planes"
                 className="text-sm text-cream/60 hover:text-cream transition-colors underline-offset-4 hover:underline"
               >
-                Ver planes desde $49/mes
+                Ver planes desde $47/mes
               </a>
             </motion.div>
           </div>

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const plans = [
   {
     name: "Inicio",
-    price: 49,
+    price: 47,
     tagline: "Para arrancar sin complicarte.",
     features: [
       "WhatsApp automatico",
@@ -21,7 +21,7 @@ const plans = [
   },
   {
     name: "Pro",
-    price: 99,
+    price: 97,
     tagline: "El que la mayoria escoge.",
     features: [
       "Todo lo de Inicio",
