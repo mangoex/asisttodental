@@ -16,7 +16,8 @@ const plans = [
       "Panel basico",
       "1 usuario",
     ],
-    cta: "Empezar con Inicio",
+    cta: "Contratar",
+    href: "https://pay.hotmart.com/R105359230P?off=2tphygax",
     featured: false,
   },
   {
@@ -31,7 +32,8 @@ const plans = [
       "Reportes mensuales",
       "Campanas basicas",
     ],
-    cta: "Quiero el Pro",
+    cta: "Contratar",
+    href: "https://pay.hotmart.com/R105359230P?off=43g79ufq",
     featured: true,
   },
   {
@@ -46,6 +48,7 @@ const plans = [
       "Soporte prioritario",
     ],
     cta: "Hablar con ventas",
+    href: "https://wa.me/5216741251648?text=Hola%2C%20me%20interesa%20el%20plan%20Premium%20de%20Asistto%20Dental",
     featured: false,
   },
 ];
@@ -72,6 +75,25 @@ export default function Pricing() {
             </p>
           </div>
         </div>
+
+        {/* Garantía banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-10 flex items-center justify-center gap-4 rounded-2xl border border-mint/25 bg-mint/5 px-6 py-4"
+        >
+          <span className="text-2xl" aria-hidden>🛡️</span>
+          <div>
+            <p className="font-display font-semibold text-cream">
+              Garantía de satisfacción — 7 días
+            </p>
+            <p className="text-sm text-cream/60">
+              Si en los primeros 7 días no estás conforme, te devolvemos el 100% de tu dinero. Sin preguntas.
+            </p>
+          </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {plans.map((p, i) => (
@@ -125,7 +147,7 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+                href={p.href}
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="cta"
@@ -136,7 +158,7 @@ export default function Pricing() {
                     : "border border-line text-cream hover:border-cream/40 hover:bg-bg-elev"
                 )}
               >
-                <span>Haz una prueba</span>
+                <span>{p.cta}</span>
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
               </a>
             </motion.div>
