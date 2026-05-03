@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
+import MetaPixel from "@/components/MetaPixel";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className="grain min-h-screen flex flex-col">
         <Cursor />
         {children}
+        <MetaPixel />
       </body>
     </html>
   );

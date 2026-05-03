@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { trackMetaEvent } from "@/lib/meta";
 
 const links = [
   { href: "#beneficios", label: "Beneficios" },
@@ -71,6 +72,12 @@ export default function Nav() {
               href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                trackMetaEvent("Lead", {
+                  content_name: "Demo gratis Asistto Dental",
+                  content_category: "nav_whatsapp",
+                })
+              }
               data-cursor="cta"
               className="group relative inline-flex items-center gap-2 rounded-full bg-mint text-bg px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
             >
@@ -105,7 +112,13 @@ export default function Nav() {
             ))}
             <a
               href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                trackMetaEvent("Lead", {
+                  content_name: "Demo gratis Asistto Dental",
+                  content_category: "mobile_nav_whatsapp",
+                });
+              }}
               target="_blank"
               rel="noreferrer"
               className="rounded-full bg-mint text-bg px-5 py-2.5 text-center font-medium"

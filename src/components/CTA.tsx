@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { trackMetaEvent } from "@/lib/meta";
 
 export default function CTA() {
   const ref = useRef<HTMLDivElement>(null);
@@ -41,6 +42,12 @@ export default function CTA() {
             href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
             target="_blank"
             rel="noreferrer"
+            onClick={() =>
+              trackMetaEvent("Lead", {
+                content_name: "Demo gratis Asistto Dental",
+                content_category: "whatsapp",
+              })
+            }
             data-cursor="cta"
             className="group inline-flex items-center gap-3 rounded-full bg-mint text-bg px-8 py-4 text-base font-medium hover:scale-[1.02] transition-transform shadow-[0_0_60px_-10px_rgba(148,229,192,0.5)]"
           >
@@ -49,6 +56,12 @@ export default function CTA() {
           </a>
           <a
             href="mailto:contacto@humanio.digital?subject=Demo%20Asistto%20Dental"
+            onClick={() =>
+              trackMetaEvent("Contact", {
+                content_name: "Email demo Asistto Dental",
+                content_category: "email",
+              })
+            }
             className="text-sm text-cream/60 hover:text-cream transition-colors underline-offset-4 hover:underline"
           >
             o escribe a contacto@humanio.digital

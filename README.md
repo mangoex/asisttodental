@@ -24,6 +24,31 @@ npm run start
 
 Conectado a Vercel. Cada push a `main` despliega automáticamente cuando se conecta el repo desde el dashboard.
 
+## Meta Pixel y Conversion API
+
+El sitio carga el Meta Pixel `27632556786333099` en todas las páginas y registra eventos de pauta en:
+
+- `PageView` al cargar la landing.
+- `Lead` cuando alguien abre WhatsApp desde la navegación, CTA o plan Premium.
+- `Contact` cuando alguien toca el correo.
+- `InitiateCheckout` cuando alguien toca un plan de Hotmart.
+
+Para activar la Conversion API del lado servidor en Vercel, agrega estas variables de entorno:
+
+```bash
+META_ACCESS_TOKEN=token_generado_en_events_manager
+META_PIXEL_ID=27632556786333099
+META_GRAPH_API_VERSION=v24.0
+```
+
+Opcional para probar en Events Manager:
+
+```bash
+META_TEST_EVENT_CODE=TEST12345
+```
+
+`NEXT_PUBLIC_META_PIXEL_ID` tambien puede usarse si quieres cambiar el Pixel publico sin tocar codigo.
+
 ## Estructura
 
 ```
