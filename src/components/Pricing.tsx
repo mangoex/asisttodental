@@ -39,16 +39,16 @@ const plans = [
   {
     name: "Premium",
     price: 149,
-    tagline: "Para clinicas con sucursales.",
+    tagline: "Para negocios con sucursales.",
     features: [
       "Todo lo de Pro",
       "Multiples sucursales",
-      "Seguimiento a pacientes inactivos",
+      "Seguimiento a contactos inactivos",
       "Dashboards completos",
       "Soporte prioritario",
     ],
     cta: "Hablar con ventas",
-    href: "https://wa.me/5216741251648?text=Hola%2C%20me%20interesa%20el%20plan%20Premium%20de%20Asistto%20Dental",
+    href: "https://wa.me/5216741251648?text=Hola%2C%20me%20interesa%20el%20plan%20Premium%20de%20Asistto",
     featured: false,
   },
 ];

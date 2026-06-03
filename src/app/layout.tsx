@@ -19,22 +19,22 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Asistto Dental — Tu asistente digital 24/7 para tu clinica",
+  title: "Asistto — Tu asistente digital 24/7 para tu negocio",
   description:
-    "Asistto Dental responde WhatsApp, agenda citas y trabaja por ti las 24 horas. Nunca pierdas un paciente por no contestar a tiempo.",
+    "Asistto responde WhatsApp, agenda citas y trabaja por ti las 24 horas. Nunca pierdas un contacto por no contestar a tiempo.",
   metadataBase: new URL("https://asistto.humanio.digital"),
   openGraph: {
-    title: "Asistto Dental — Tu asistente digital",
+    title: "Asistto — Tu asistente digital 24/7",
     description:
       "Agenda citas, responde preguntas y trabaja 24/7. Por Humanio.",
     type: "website",
     locale: "es_MX",
-    siteName: "Asistto Dental",
+    siteName: "Asistto",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Asistto Dental",
-    description: "Tu asistente digital 24/7 para clinicas dentales.",
+    title: "Asistto",
+    description: "Tu asistente digital 24/7 para tu negocio.",
   },
   robots: { index: true, follow: true },
 };

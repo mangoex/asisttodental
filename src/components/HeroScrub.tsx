@@ -138,7 +138,7 @@ export default function HeroScrub() {
                     className="font-display font-bold leading-[0.9] tracking-tight"
                     style={{ color: "#E1E0CC", fontSize: "clamp(2.6rem, 7vw, 7.5rem)" }}
                   >
-                    <WordsPullUp text="Nunca pierdas un paciente por" />
+                    <WordsPullUp text="Nunca pierdas un contacto por" />
                     {" "}
                     <span className="text-mint">
                       <WordsPullUp text="no responder" />
@@ -157,8 +157,8 @@ export default function HeroScrub() {
                     className="text-sm md:text-base leading-[1.4]"
                     style={{ color: "rgba(225, 224, 204, 0.7)" }}
                   >
-                    Asistto Dental agenda citas, responde preguntas y trabaja 24/7.
-                    Tu equipo se enfoca en lo que importa: atender al paciente que ya está en el sillón.
+                    Asistto agenda citas, responde preguntas y trabaja 24/7.
+                    Tu equipo se enfoca en lo que importa: atender al cliente y hacer crecer tu negocio.
                   </motion.p>
 
                   <motion.div
@@ -168,7 +168,7 @@ export default function HeroScrub() {
                     className="flex flex-wrap items-center gap-4"
                   >
                     <a
-                      href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+                      href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto"
                       target="_blank"
                       rel="noreferrer"
                       data-cursor="cta"

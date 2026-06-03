@@ -23,83 +23,82 @@ interface DialogNode {
 const DIALOG_TREE: Record<string, DialogNode> = {
   inicio: {
     botMessages: [
-      "¡Hola! Bienvenido a Asistto Dental. 🦷",
-      "Soy el asistente inteligente de tu clínica. Respondo dudas, agendo citas y trabajo por ti las 24 horas.",
+      "¡Hola! Bienvenido a Asistto. 🤖",
+      "Soy el asistente inteligente 24/7 de tu negocio. Respondo dudas, agendo reuniones y califico prospectos por WhatsApp.",
       "Prueba interactuar conmigo seleccionando alguna de las siguientes opciones:"
     ],
     options: [
-      { text: "🗓️ ¿Tienen citas libres el sábado?", nextNodeId: "citas_sabado" },
-      { text: "💰 ¿Qué precio tiene la limpieza?", nextNodeId: "precios" },
+      { text: "🗓️ ¿Tienen citas libres esta semana?", nextNodeId: "citas_semana" },
+      { text: "💰 ¿Qué servicios ofrecen y sus precios?", nextNodeId: "precios" },
       { text: "📍 ¿Dónde están ubicados?", nextNodeId: "ubicacion" }
     ]
   },
-  citas_sabado: {
+  citas_semana: {
     botMessages: [
-      "¡Sí, claro! Este sábado tenemos disponibilidad. 📅",
-      "Te muestro los horarios libres de nuestro calendario:\n\n🕐 10:00 am · 12:30 pm · 4:00 pm",
+      "¡Sí, claro! Tenemos disponibilidad esta semana. 📅",
+      "Te muestro los horarios libres de nuestro calendario:\n\n🕐 Lunes 10:00 am · Martes 2:30 pm · Miércoles 4:00 pm",
       "¿Cuál de estos te queda mejor?"
     ],
     options: [
-      { text: "👉 12:30 pm está perfecto", nextNodeId: "cita_confirmada" },
-      { text: "👩‍⚕️ ¿Qué doctora atiende?", nextNodeId: "doctora" },
+      { text: "👉 Lunes 10:00 am está perfecto", nextNodeId: "cita_confirmada" },
+      { text: "👤 ¿Quién me atenderá?", nextNodeId: "equipo" },
       { text: "🔙 Ver otras dudas", nextNodeId: "inicio" }
     ]
   },
   cita_confirmada: {
     botMessages: [
-      "¡Listo! Cita confirmada para el sábado a las 12:30 pm con la Dra. Sandra Mendoza. 👩‍⚕️",
-      "Te llegará un recordatorio automático por WhatsApp un día antes y el mismo día para reconfirmar. 👍",
+      "¡Listo! Cita confirmada para el lunes a las 10:00 am. 🚀",
+      "Te llegará un recordatorio automático por WhatsApp un día antes para reconfirmar. 👍",
       "¿Te gustaría consultar algo más?"
     ],
     options: [
-      { text: "📍 ¿Cómo llego al consultorio?", nextNodeId: "ubicacion" },
-      { text: "💳 ¿Aceptan tarjetas?", nextNodeId: "tarjetas" },
+      { text: "📍 ¿Cómo llego a sus oficinas?", nextNodeId: "ubicacion" },
+      { text: "💳 ¿Qué formas de pago aceptan?", nextNodeId: "tarjetas" },
       { text: "🔄 Reiniciar simulación", nextNodeId: "inicio" }
     ]
   },
-  doctora: {
+  equipo: {
     botMessages: [
-      "Te atendería la Dra. Sandra Mendoza, nuestra especialista en odontología estética y general. 🩺",
-      "Tiene más de 8 años de experiencia, es súper paciente y le encanta explicar a detalle todo tu tratamiento."
+      "Te atenderá uno de nuestros asesores especializados según las necesidades de tu proyecto. 🤝",
+      "Todos cuentan con amplia trayectoria y te guiarán paso a paso en tu sesión de consultoría inicial."
     ],
     options: [
-      { text: "🗓️ Agendar a las 12:30 pm", nextNodeId: "cita_confirmada" },
-      { text: "💰 Ver precios de limpieza", nextNodeId: "precios" },
+      { text: "🗓️ Agendar el lunes a las 10:00 am", nextNodeId: "cita_confirmada" },
+      { text: "💰 Ver precios de servicios", nextNodeId: "precios" },
       { text: "🔙 Volver al inicio", nextNodeId: "inicio" }
     ]
   },
   precios: {
     botMessages: [
-      "La limpieza dental ultrasónica profesional cuesta $45 USD. 🧼",
-      "Incluye diagnóstico completo, eliminación de sarro y pulido dental. Además de una cámara intraoral para que veas tus resultados.",
-      "¿Te gustaría agendar una cita o revisar los métodos de pago?"
+      "Ofrecemos consultorías iniciales de diagnóstico gratis y planes de automatización a la medida. 📈",
+      "Nuestros servicios mensuales de asistencia con Inteligencia Artificial comienzan desde $47 USD. ¿Te gustaría agendar una llamada de diagnóstico?"
     ],
     options: [
-      { text: "🗓️ Sí, quiero agendar el sábado", nextNodeId: "citas_sabado" },
+      { text: "🗓️ Sí, quiero agendar llamada", nextNodeId: "citas_semana" },
       { text: "💳 ¿Qué formas de pago aceptan?", nextNodeId: "tarjetas" },
       { text: "🔙 Volver al inicio", nextNodeId: "inicio" }
     ]
   },
   tarjetas: {
     botMessages: [
-      "Aceptamos todas las tarjetas de crédito y débito (Visa, Mastercard, Amex), efectivo, transferencia y reembolsos de aseguradoras. 💳",
-      "Si tienes seguro, te facilitamos la factura y reporte clínico para tu trámite."
+      "Aceptamos todas las tarjetas de crédito y débito (Visa, Mastercard, Amex), transferencia bancaria directa y PayPal. 💳",
+      "Emitimos factura fiscal de inmediato por cada pago recibido."
     ],
     options: [
-      { text: "🗓️ Agendar cita el sábado", nextNodeId: "citas_sabado" },
+      { text: "🗓️ Agendar cita esta semana", nextNodeId: "citas_semana" },
       { text: "📍 ¿Dónde están ubicados?", nextNodeId: "ubicacion" },
       { text: "🔄 Reiniciar simulación", nextNodeId: "inicio" }
     ]
   },
   ubicacion: {
     botMessages: [
-      "Estamos en Av. Reforma 405, Piso 2, Colonia Roma Norte, CDMX. 📍",
-      "Hay estacionamiento público a media cuadra y estamos a solo 3 minutos caminando del Metro Sevilla.",
-      "Nuestro horario de atención es de Lunes a Sábado de 9:00 am a 7:00 pm."
+      "Nuestras oficinas principales están en Av. Reforma 405, Piso 2, Colonia Roma Norte, CDMX. 📍",
+      "También realizamos todas las reuniones por videollamada (Zoom o Google Meet) si lo prefieres.",
+      "Atendemos de Lunes a Sábado de 9:00 am a 7:00 pm."
     ],
     options: [
-      { text: "🗓️ Ver citas para el sábado", nextNodeId: "citas_sabado" },
-      { text: "💰 Ver precio de limpieza", nextNodeId: "precios" },
+      { text: "🗓️ Ver citas para esta semana", nextNodeId: "citas_semana" },
+      { text: "💰 Ver precios y servicios", nextNodeId: "precios" },
       { text: "🔄 Reiniciar simulación", nextNodeId: "inicio" }
     ]
   }
@@ -241,7 +240,7 @@ export default function Showcase() {
               Asi se ve una conversacion <span className="font-serif italic text-muted">de verdad.</span>
             </h2>
             <p className="text-cream/65 leading-relaxed mt-6 max-w-md">
-              Sin sonar a robot. Sin cinco preguntas antes de la primera respuesta. Solo lo que el paciente necesita, cuando lo necesita.
+              Sin sonar a robot. Sin cinco preguntas antes de la primera respuesta. Solo lo que tu contacto necesita, cuando lo necesita.
             </p>
             <ul className="mt-10 space-y-4 text-sm text-cream/70">
               {[
@@ -270,10 +269,10 @@ export default function Showcase() {
               <div className="flex items-center justify-between pb-4 mb-4 border-b border-line">
                 <div className="flex items-center gap-3">
                   <div className="size-10 rounded-full bg-gradient-to-br from-mint to-mint-soft flex items-center justify-center text-bg font-display font-semibold select-none">
-                    AD
+                    A
                   </div>
                   <div>
-                    <p className="text-sm font-medium">Asistto Dental</p>
+                    <p className="text-sm font-medium">Asistto</p>
                     <p className="text-xs text-muted flex items-center gap-1.5">
                       <span className="size-1.5 rounded-full bg-mint pulse-dot" aria-hidden />
                       En linea · responde en segundos

@@ -7,7 +7,7 @@ const steps = [
   {
     n: "01",
     title: "Conectas tu WhatsApp",
-    body: "En menos de 10 minutos. Usamos tu numero actual o uno nuevo, tu eliges. Nada de cambios en la rutina del consultorio.",
+    body: "En menos de 10 minutos. Usamos tu numero actual o uno nuevo, tu eliges. Nada de cambios en la rutina de tu negocio.",
   },
   {
     n: "02",

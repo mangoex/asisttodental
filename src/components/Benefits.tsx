@@ -22,14 +22,14 @@ const benefits = [
   {
     icon: Sparkles,
     title: "Mejor imagen",
-    detail: "Respuestas claras, en segundos, todos los dias. La clinica se ve moderna porque lo es.",
+    detail: "Respuestas claras, en segundos, todos los dias. Tu negocio se ve moderno porque lo es.",
     metric: "4.9",
     metricLabel: "rating promedio",
   },
   {
     icon: Zap,
     title: "Atencion inmediata",
-    detail: "El paciente escribe a las 11 pm un domingo. Le contestas igual. Eso ya no se discute.",
+    detail: "Tu cliente escribe a las 11 pm un domingo. Le contestas igual. Eso ya no se discute.",
     metric: "24/7",
     metricLabel: "sin pausas",
   },

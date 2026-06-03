@@ -8,10 +8,9 @@ export default function Footer() {
             <a href="#" className="flex items-center gap-2 font-display font-semibold text-cream">
               <span className="inline-block size-2 rounded-full bg-mint" aria-hidden />
               Asistto
-              <span className="text-muted text-sm font-mono">/dental</span>
             </a>
             <p className="mt-4 text-sm text-cream/55 max-w-sm leading-relaxed">
-              Tu asistente digital para clinicas dentales. Trabajamos para que ningun paciente se quede sin respuesta.
+              Tu asistente digital para todo tipo de negocios. Trabajamos para que ningún contacto se quede sin respuesta.
             </p>
           </div>
 
@@ -55,7 +54,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 pt-8 border-t border-line flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-muted">
-          <p>© {year} Asistto Dental. Todos los derechos reservados.</p>
+          <p>© {year} Asistto. Todos los derechos reservados.</p>
           <p className="flex items-center gap-2">
             Asistto de
             <a

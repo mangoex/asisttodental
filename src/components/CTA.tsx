@@ -30,7 +30,7 @@ export default function CTA() {
         </span>
         <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold leading-[0.95] tracking-tight mt-6">
           Veelo trabajando <br />
-          <span className="text-mint">con tu propia clinica.</span>
+          <span className="text-mint">con tu propio negocio.</span>
         </h2>
         <p className="mt-8 text-cream/65 text-lg max-w-xl mx-auto">
           Te montamos una demo con tus FAQs reales. Sin tarjeta, sin compromiso. Si te late, lo dejamos puesto el mismo dia.
@@ -38,7 +38,7 @@ export default function CTA() {
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+            href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto"
             target="_blank"
             rel="noreferrer"
             data-cursor="cta"
@@ -48,7 +48,7 @@ export default function CTA() {
             <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
           </a>
           <a
-            href="mailto:contacto@humanio.digital?subject=Demo%20Asistto%20Dental"
+            href="mailto:contacto@humanio.digital?subject=Demo%20Asistto"
             className="text-sm text-cream/60 hover:text-cream transition-colors underline-offset-4 hover:underline"
           >
             o escribe a contacto@humanio.digital

@@ -11,11 +11,11 @@ const faqs = [
   },
   {
     q: "Cuanto tarda en arrancar?",
-    a: "Una sola tarde. La parte tecnica se resuelve en menos de una hora. El resto es entrenarlo con tus FAQs, que es una llamada de 30 a 45 minutos contigo o con tu recepcion.",
+    a: "Una sola tarde. La parte tecnica se resuelve en menos de una hora. El resto es entrenarlo con tus FAQs, que es una llamada de 30 a 45 minutos contigo o con tu equipo.",
   },
   {
     q: "Que pasa si Asistto no sabe responder algo?",
-    a: "Te lo deriva al instante. El paciente no se queda esperando: recibe un aviso de que un humano responde en breve y a ti te llega la conversacion completa para retomarla.",
+    a: "Te lo deriva al instante. El cliente no se queda esperando: recibe un aviso de que un humano responde en breve y a ti te llega la conversacion completa para retomarla.",
   },
   {
     q: "Puedo cancelar cuando quiera?",
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: "Funciona con mi sistema de citas actual?",
-    a: "Si usas Google Calendar, listo. Si tienes otro software dental, lo revisamos en la demo. Casi siempre se conecta.",
+    a: "Si usas Google Calendar, listo. Si tienes otro software de agenda o CRM, lo revisamos en la demo. Casi siempre se conecta.",
   },
 ];
 

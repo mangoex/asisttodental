@@ -39,13 +39,12 @@ export default function Nav() {
           >
             <Image
               src="/logo.svg"
-              alt="Asistto Dental logo"
+              alt="Asistto logo"
               width={28}
               height={28}
               className="rounded-md"
             />
-            <span className="tracking-tight">Asistto</span>
-            <span className="text-sm opacity-40">/dental</span>
+            <span className="tracking-tight text-lg">Asistto</span>
           </a>
         </div>
 
@@ -99,7 +98,7 @@ export default function Nav() {
             rel="noreferrer"
             onClick={() =>
               trackMetaEvent("Lead", {
-                content_name: "Demo gratis Asistto Dental",
+                content_name: "Demo gratis Asistto",
                 content_category: "nav_whatsapp",
               })
             }
@@ -163,7 +162,7 @@ export default function Nav() {
               onClick={() => {
                 setOpen(false);
                 trackMetaEvent("Lead", {
-                  content_name: "Demo gratis Asistto Dental",
+                  content_name: "Demo gratis Asistto",
                   content_category: "mobile_nav_whatsapp",
                 });
               }}
