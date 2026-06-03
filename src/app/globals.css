@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0A0F1C;
-  --color-bg-elev: #131B2E;
-  --color-bg-soft: #0E1422;
-  --color-cream: #F5F3EE;
+  --color-bg: #000000;
+  --color-bg-elev: #101010;
+  --color-bg-soft: #0A0A0A;
+  --color-cream: #E1E0CC;
+  --color-primary: #DEDBC8;
   --color-mint: #94E5C0;
   --color-mint-soft: #6FCEA9;
   --color-coral: #FF8A65;
-  --color-muted: #8B95AD;
-  --color-line: rgba(245, 243, 238, 0.08);
+  --color-muted: #6B7280;
+  --color-line: rgba(225, 224, 204, 0.08);
 
-  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
-  --font-body: var(--font-dm-sans), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-display: var(--font-almarai), system-ui, sans-serif;
+  --font-body: var(--font-almarai), system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --font-serif: var(--font-instrument-serif), serif;
 
   --shadow-glow: 0 0 60px -10px rgba(148, 229, 192, 0.35);
   --shadow-coral: 0 0 80px -20px rgba(255, 138, 101, 0.45);
@@ -32,7 +34,6 @@ body {
   background: var(--color-bg);
   color: var(--color-cream);
   font-family: var(--font-body);
-  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   cursor: none;
@@ -56,6 +57,23 @@ body {
   font-family: var(--font-mono);
 }
 
+.font-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* Fractal noise overlay — hero video layer */
+.noise-overlay {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
+}
+
+/* Subtle noise — section backgrounds */
+.bg-noise {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
+}
+
 .grain::before {
   content: "";
   position: fixed;
@@ -69,8 +87,8 @@ body {
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(245, 243, 238, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 243, 238, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(225, 224, 204, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(225, 224, 204, 0.03) 1px, transparent 1px);
   background-size: 64px 64px;
   background-position: -1px -1px;
 }
@@ -93,6 +111,19 @@ body {
   50% { box-shadow: 0 0 0 10px rgba(148, 229, 192, 0); }
 }
 .pulse-dot { animation: pulse-dot 2s ease-out infinite; }
+.chat-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: rgba(225, 224, 204, 0.15);
+  border-radius: 9999px;
+}
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mint);
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

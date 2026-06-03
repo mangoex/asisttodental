@@ -1,24 +1,228 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { RotateCcw } from "lucide-react";
 
-const messages = [
-  { from: "user", text: "Hola, quiero agendar una limpieza. Tienen cupo el sabado?" },
-  { from: "bot", text: "Hola! Si, tenemos disponibilidad el sabado. Te muestro los horarios:" },
-  { from: "bot", text: "🕐 10:00 am · 12:30 pm · 4:00 pm\n\nCual te queda mejor?" },
-  { from: "user", text: "12:30 esta perfecto" },
-  { from: "bot", text: "Listo. Confirmada tu cita para el sab 27 a las 12:30 pm con la Dra. Mendoza. Te recuerdo un dia antes 👍" },
-];
+interface Message {
+  from: "user" | "bot";
+  text: string;
+  time: string;
+}
+
+interface DialogOption {
+  text: string;
+  nextNodeId: string;
+}
+
+interface DialogNode {
+  botMessages: string[];
+  options: DialogOption[];
+}
+
+const DIALOG_TREE: Record<string, DialogNode> = {
+  inicio: {
+    botMessages: [
+      "¡Hola! Bienvenido a Asistto Dental. 🦷",
+      "Soy el asistente inteligente de tu clínica. Respondo dudas, agendo citas y trabajo por ti las 24 horas.",
+      "Prueba interactuar conmigo seleccionando alguna de las siguientes opciones:"
+    ],
+    options: [
+      { text: "🗓️ ¿Tienen citas libres el sábado?", nextNodeId: "citas_sabado" },
+      { text: "💰 ¿Qué precio tiene la limpieza?", nextNodeId: "precios" },
+      { text: "📍 ¿Dónde están ubicados?", nextNodeId: "ubicacion" }
+    ]
+  },
+  citas_sabado: {
+    botMessages: [
+      "¡Sí, claro! Este sábado tenemos disponibilidad. 📅",
+      "Te muestro los horarios libres de nuestro calendario:\n\n🕐 10:00 am · 12:30 pm · 4:00 pm",
+      "¿Cuál de estos te queda mejor?"
+    ],
+    options: [
+      { text: "👉 12:30 pm está perfecto", nextNodeId: "cita_confirmada" },
+      { text: "👩‍⚕️ ¿Qué doctora atiende?", nextNodeId: "doctora" },
+      { text: "🔙 Ver otras dudas", nextNodeId: "inicio" }
+    ]
+  },
+  cita_confirmada: {
+    botMessages: [
+      "¡Listo! Cita confirmada para el sábado a las 12:30 pm con la Dra. Sandra Mendoza. 👩‍⚕️",
+      "Te llegará un recordatorio automático por WhatsApp un día antes y el mismo día para reconfirmar. 👍",
+      "¿Te gustaría consultar algo más?"
+    ],
+    options: [
+      { text: "📍 ¿Cómo llego al consultorio?", nextNodeId: "ubicacion" },
+      { text: "💳 ¿Aceptan tarjetas?", nextNodeId: "tarjetas" },
+      { text: "🔄 Reiniciar simulación", nextNodeId: "inicio" }
+    ]
+  },
+  doctora: {
+    botMessages: [
+      "Te atendería la Dra. Sandra Mendoza, nuestra especialista en odontología estética y general. 🩺",
+      "Tiene más de 8 años de experiencia, es súper paciente y le encanta explicar a detalle todo tu tratamiento."
+    ],
+    options: [
+      { text: "🗓️ Agendar a las 12:30 pm", nextNodeId: "cita_confirmada" },
+      { text: "💰 Ver precios de limpieza", nextNodeId: "precios" },
+      { text: "🔙 Volver al inicio", nextNodeId: "inicio" }
+    ]
+  },
+  precios: {
+    botMessages: [
+      "La limpieza dental ultrasónica profesional cuesta $45 USD. 🧼",
+      "Incluye diagnóstico completo, eliminación de sarro y pulido dental. Además de una cámara intraoral para que veas tus resultados.",
+      "¿Te gustaría agendar una cita o revisar los métodos de pago?"
+    ],
+    options: [
+      { text: "🗓️ Sí, quiero agendar el sábado", nextNodeId: "citas_sabado" },
+      { text: "💳 ¿Qué formas de pago aceptan?", nextNodeId: "tarjetas" },
+      { text: "🔙 Volver al inicio", nextNodeId: "inicio" }
+    ]
+  },
+  tarjetas: {
+    botMessages: [
+      "Aceptamos todas las tarjetas de crédito y débito (Visa, Mastercard, Amex), efectivo, transferencia y reembolsos de aseguradoras. 💳",
+      "Si tienes seguro, te facilitamos la factura y reporte clínico para tu trámite."
+    ],
+    options: [
+      { text: "🗓️ Agendar cita el sábado", nextNodeId: "citas_sabado" },
+      { text: "📍 ¿Dónde están ubicados?", nextNodeId: "ubicacion" },
+      { text: "🔄 Reiniciar simulación", nextNodeId: "inicio" }
+    ]
+  },
+  ubicacion: {
+    botMessages: [
+      "Estamos en Av. Reforma 405, Piso 2, Colonia Roma Norte, CDMX. 📍",
+      "Hay estacionamiento público a media cuadra y estamos a solo 3 minutos caminando del Metro Sevilla.",
+      "Nuestro horario de atención es de Lunes a Sábado de 9:00 am a 7:00 pm."
+    ],
+    options: [
+      { text: "🗓️ Ver citas para el sábado", nextNodeId: "citas_sabado" },
+      { text: "💰 Ver precio de limpieza", nextNodeId: "precios" },
+      { text: "🔄 Reiniciar simulación", nextNodeId: "inicio" }
+    ]
+  }
+};
+
+const getFormattedTime = () => {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, "0");
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
 
 export default function Showcase() {
   const ref = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
   const x = useTransform(scrollYProgress, [0, 1], [80, -80]);
   const x2 = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+
+  const isInView = useInView(ref, { once: true, amount: 0.25 });
+
+  // Conversation States
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [options, setOptions] = useState<DialogOption[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  
+  const sequenceRef = useRef(0);
+
+  // Auto scroll to bottom
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages, isTyping]);
+
+  // Trigger initial chat sequence when component is visible
+  useEffect(() => {
+    if (isInView && !hasStarted) {
+      setHasStarted(true);
+      restartConversation();
+    }
+  }, [isInView, hasStarted]);
+
+  const restartConversation = async () => {
+    const currentSeq = ++sequenceRef.current;
+    
+    // Clear everything
+    setMessages([]);
+    setOptions([]);
+    setIsTyping(true);
+    
+    // Initial wait
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (currentSeq !== sequenceRef.current) return;
+
+    const node = DIALOG_TREE.inicio;
+    for (let i = 0; i < node.botMessages.length; i++) {
+      setIsTyping(true);
+      
+      // Simulate typing speed proportional to message length
+      const delay = Math.max(800, node.botMessages[i].length * 15);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      if (currentSeq !== sequenceRef.current) return;
+      
+      setMessages((prev) => [
+        ...prev,
+        { from: "bot", text: node.botMessages[i], time: getFormattedTime() }
+      ]);
+    }
+    
+    setIsTyping(false);
+    setOptions(node.options);
+  };
+
+  const handleOptionClick = async (opt: DialogOption) => {
+    const currentSeq = ++sequenceRef.current;
+    
+    // 1. Add User Message
+    setMessages((prev) => [
+      ...prev,
+      { from: "user", text: opt.text, time: getFormattedTime() }
+    ]);
+    setOptions([]); // Hide options during bot reply simulation
+
+    // 2. Start Typing Animation
+    setIsTyping(true);
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    if (currentSeq !== sequenceRef.current) return;
+
+    if (opt.nextNodeId === "inicio") {
+      restartConversation();
+      return;
+    }
+
+    // 3. Load Target Dialog Node
+    const node = DIALOG_TREE[opt.nextNodeId];
+    if (!node) {
+      setIsTyping(false);
+      return;
+    }
+
+    for (let i = 0; i < node.botMessages.length; i++) {
+      setIsTyping(true);
+      
+      const delay = Math.max(900, node.botMessages[i].length * 15);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      if (currentSeq !== sequenceRef.current) return;
+      
+      setMessages((prev) => [
+        ...prev,
+        { from: "bot", text: node.botMessages[i], time: getFormattedTime() }
+      ]);
+    }
+
+    setIsTyping(false);
+    setOptions(node.options);
+  };
 
   return (
     <section
@@ -27,12 +231,14 @@ export default function Showcase() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Left info column */}
           <motion.div style={{ x: x2 }} className="lg:col-span-5">
             <span className="font-mono text-xs uppercase tracking-[0.3em] text-mint">
               03 / En vivo
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight mt-6">
-              Asi se ve una conversacion <span className="text-muted">de verdad.</span>
+              Asi se ve una conversacion <span className="font-serif italic text-muted">de verdad.</span>
             </h2>
             <p className="text-cream/65 leading-relaxed mt-6 max-w-md">
               Sin sonar a robot. Sin cinco preguntas antes de la primera respuesta. Solo lo que el paciente necesita, cuando lo necesita.
@@ -52,59 +258,137 @@ export default function Showcase() {
             </ul>
           </motion.div>
 
+          {/* Right chat simulator column */}
           <motion.div
             style={{ x }}
             className="lg:col-span-7 relative"
           >
             <div className="absolute -inset-8 bg-mint/5 blur-3xl rounded-full" aria-hidden />
-            <div className="relative rounded-3xl border border-line bg-bg-elev/60 backdrop-blur-sm p-6 md:p-8 shadow-2xl">
-              <div className="flex items-center gap-3 pb-5 mb-5 border-b border-line">
-                <div className="size-10 rounded-full bg-gradient-to-br from-mint to-mint-soft flex items-center justify-center text-bg font-display font-semibold">
-                  AD
+            <div className="relative rounded-3xl border border-line bg-bg-elev/60 backdrop-blur-sm p-4 md:p-6 shadow-2xl overflow-hidden">
+              
+              {/* WhatsApp Header */}
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-line">
+                <div className="flex items-center gap-3">
+                  <div className="size-10 rounded-full bg-gradient-to-br from-mint to-mint-soft flex items-center justify-center text-bg font-display font-semibold select-none">
+                    AD
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Asistto Dental</p>
+                    <p className="text-xs text-muted flex items-center gap-1.5">
+                      <span className="size-1.5 rounded-full bg-mint pulse-dot" aria-hidden />
+                      En linea · responde en segundos
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium">Asistto Dental</p>
-                  <p className="text-xs text-muted flex items-center gap-1.5">
-                    <span className="size-1.5 rounded-full bg-mint pulse-dot" aria-hidden />
-                    En linea · responde en segundos
-                  </p>
-                </div>
+                
+                {/* Reset button */}
+                <button
+                  onClick={restartConversation}
+                  title="Reiniciar chat"
+                  className="size-8 rounded-full border border-line flex items-center justify-center text-cream/60 hover:text-mint hover:border-mint/30 hover:bg-mint/5 transition-all active:scale-95 cursor-none"
+                  data-cursor="cta"
+                >
+                  <RotateCcw className="size-4" />
+                </button>
               </div>
-              <div className="space-y-3">
+
+              {/* Messages Container (Fixed Scroll Area) */}
+              <div 
+                ref={chatContainerRef}
+                className="chat-scroll h-[320px] md:h-[350px] overflow-y-auto pr-1.5 space-y-3.5 scroll-smooth"
+              >
                 {messages.map((m, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.4, delay: i * 0.15 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
                     className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm whitespace-pre-line leading-relaxed ${
+                      className={`relative max-w-[85%] rounded-2xl px-4 py-2.5 text-sm whitespace-pre-line leading-relaxed shadow-sm ${
                         m.from === "user"
-                          ? "bg-mint text-bg rounded-br-sm"
-                          : "bg-bg/80 text-cream rounded-bl-sm border border-line"
+                          ? "bg-mint text-bg rounded-br-sm pr-14 pb-2"
+                          : "bg-bg/85 text-cream rounded-bl-sm border border-line pr-14 pb-2"
                       }`}
                     >
-                      {m.text}
+                      <span>{m.text}</span>
+                      
+                      {/* Message meta (time + checkmarks) */}
+                      <span 
+                        className={`absolute bottom-0.5 right-2 flex items-center gap-0.5 text-[9px] font-mono select-none ${
+                          m.from === "user" ? "text-bg/60" : "text-muted"
+                        }`}
+                      >
+                        {m.time}
+                        {m.from === "user" && (
+                          <span className="text-bg font-bold font-sans">✓✓</span>
+                        )}
+                      </span>
                     </div>
                   </motion.div>
                 ))}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: messages.length * 0.15 + 0.2 }}
-                  className="flex items-center gap-1.5 pt-2 pl-2"
-                >
-                  <span className="size-1.5 rounded-full bg-muted animate-bounce" />
-                  <span className="size-1.5 rounded-full bg-muted animate-bounce [animation-delay:120ms]" />
-                  <span className="size-1.5 rounded-full bg-muted animate-bounce [animation-delay:240ms]" />
-                </motion.div>
+
+                {/* Bouncing Typing Indicator */}
+                {isTyping && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex justify-start"
+                  >
+                    <div className="bg-bg/85 text-cream rounded-2xl rounded-bl-sm border border-line px-4 py-3 shadow-sm flex items-center gap-1">
+                      <span className="size-1.5 rounded-full bg-mint animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="size-1.5 rounded-full bg-mint animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="size-1.5 rounded-full bg-mint animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </div>
+                  </motion.div>
+                )}
+                
+                <div ref={chatEndRef} />
               </div>
+
+              {/* Input Area / Interactive Quick Replies */}
+              <div className="border-t border-line pt-4 mt-4">
+                <AnimatePresence mode="wait">
+                  {options.length > 0 ? (
+                    <motion.div 
+                      key="options"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      className="flex flex-wrap gap-2 justify-center"
+                    >
+                      {options.map((opt) => (
+                        <motion.button
+                          key={opt.text}
+                          whileHover={{ scale: 1.02, backgroundColor: "rgba(148, 229, 192, 0.1)" }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleOptionClick(opt)}
+                          className="rounded-full border border-mint/30 bg-mint/5 px-4 py-2 text-xs text-mint transition-colors duration-200 cursor-none select-none"
+                          data-cursor="cta"
+                        >
+                          {opt.text}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  ) : (
+                    !isTyping && messages.length > 0 && (
+                      <motion.div
+                        key="reset-hint"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-center text-xs text-muted py-2 select-none"
+                      >
+                        Simulación terminada. Puedes reiniciarla arriba.
+                      </motion.div>
+                    )
+                  )}
+                </AnimatePresence>
+              </div>
+
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>

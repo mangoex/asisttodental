@@ -11,9 +11,11 @@ export default function Cursor() {
 
   const [hover, setHover] = useState(false);
   const [variant, setVariant] = useState<"default" | "cta" | "text">("default");
+  const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) {
+      setEnabled(false);
       document.body.style.cursor = "auto";
       return;
     }
@@ -47,6 +49,8 @@ export default function Cursor() {
       window.removeEventListener("mouseover", over);
     };
   }, [x, y]);
+
+  if (!enabled) return null;
 
   const size = variant === "cta" ? 56 : variant === "text" ? 4 : 12;
   const ringSize = variant === "cta" ? 56 : 36;

@@ -1,27 +1,20 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Almarai, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
-import MetaPixel from "@/components/MetaPixel";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const almarai = Almarai({
+  variable: "--font-almarai",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "700", "800"],
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: "400",
+  style: "italic",
   display: "swap",
 });
 
@@ -44,9 +37,6 @@ export const metadata: Metadata = {
     description: "Tu asistente digital 24/7 para clinicas dentales.",
   },
   robots: { index: true, follow: true },
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({
@@ -55,12 +45,11 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrains.variable} antialiased`}
+      className={`${almarai.variable} ${instrumentSerif.variable} antialiased`}
     >
       <body className="grain min-h-screen flex flex-col">
         <Cursor />
         {children}
-        <MetaPixel />
       </body>
     </html>
   );

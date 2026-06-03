@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { trackMetaEvent } from "@/lib/meta";
 
 const plans = [
   {
@@ -151,17 +150,6 @@ export default function Pricing() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() =>
-                  trackMetaEvent(
-                    p.href.includes("hotmart.com") ? "InitiateCheckout" : "Lead",
-                    {
-                      content_name: `Plan ${p.name}`,
-                      content_category: "pricing",
-                      currency: "USD",
-                      value: p.price,
-                    }
-                  )
-                }
                 data-cursor="cta"
                 className={cn(
                   "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium transition-all",
