@@ -110,9 +110,15 @@ export default function HeroScrub() {
             aria-hidden
           />
 
+          {/* Flat dark mask to dim the video and increase overall text contrast */}
+          <div
+            className="absolute inset-0 bg-black/40 pointer-events-none"
+            aria-hidden
+          />
+
           {/* Gradient overlay — darkens bottom for text legibility */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 pointer-events-none"
+            className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/75 pointer-events-none"
             style={{ opacity: overlayOpacity }}
             aria-hidden
           />
@@ -136,7 +142,7 @@ export default function HeroScrub() {
                 <div className="col-span-12 lg:col-span-8">
                   <h1
                     className="font-display font-bold leading-[0.9] tracking-tight"
-                    style={{ color: "#E1E0CC", fontSize: "clamp(2.6rem, 7vw, 7.5rem)" }}
+                    style={{ color: "#FFFFFF", fontSize: "clamp(2.6rem, 7vw, 7.5rem)" }}
                   >
                     <WordsPullUp text="Nunca pierdas un contacto por" />
                     {" "}
@@ -155,7 +161,7 @@ export default function HeroScrub() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     className="text-sm md:text-base leading-[1.4]"
-                    style={{ color: "rgba(225, 224, 204, 0.7)" }}
+                    style={{ color: "rgba(255, 255, 255, 0.9)" }}
                   >
                     Asistto agenda citas, responde preguntas y trabaja 24/7.
                     Tu equipo se enfoca en lo que importa: atender al cliente y hacer crecer tu negocio.
@@ -182,9 +188,9 @@ export default function HeroScrub() {
                     <a
                       href="#planes"
                       className="text-sm transition-colors hover:underline underline-offset-4"
-                      style={{ color: "rgba(225, 224, 204, 0.55)" }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(225,224,204,0.9)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(225,224,204,0.55)")}
+                      style={{ color: "rgba(255, 255, 255, 0.65)" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
                     >
                       Ver planes desde $47/mes
                     </a>
