@@ -93,7 +93,7 @@ export default function Nav() {
         {/* CTA — right */}
         <div className="hidden md:flex items-center h-16 shrink-0">
           <a
-            href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+            href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto"
             target="_blank"
             rel="noreferrer"
             onClick={() =>
@@ -158,7 +158,7 @@ export default function Nav() {
             </div>
 
             <a
-              href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto%20Dental"
+              href="https://wa.me/5216741251648?text=Hola%2C%20quiero%20hacer%20una%20prueba%20de%20Asistto"
               onClick={() => {
                 setOpen(false);
                 trackMetaEvent("Lead", {
