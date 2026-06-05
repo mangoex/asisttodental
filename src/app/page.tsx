@@ -1,5 +1,5 @@
 import Nav from "@/components/Nav";
-import HeroScrub from "@/components/HeroScrub";
+import HeroScroll from "@/components/HeroScroll";
 import Benefits from "@/components/Benefits";
 import HowItWorks from "@/components/HowItWorks";
 import Showcase from "@/components/Showcase";
@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Nav />
       <main>
-        <HeroScrub />
+        <HeroScroll />
         <Benefits />
         <HowItWorks />
         <Showcase />
