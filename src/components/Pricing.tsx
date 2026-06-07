@@ -6,49 +6,35 @@ import { cn } from "@/lib/utils";
 
 const plans = [
   {
-    name: "Inicio",
-    price: 47,
-    tagline: "Para arrancar sin complicarte.",
-    features: [
-      "WhatsApp automatico",
-      "FAQs personalizadas",
-      "Captura de leads",
-      "Panel basico",
-      "1 usuario",
-    ],
-    cta: "Contratar",
-    href: "https://pay.hotmart.com/R105359230P?off=2tphygax",
-    featured: false,
-  },
-  {
     name: "Pro",
     price: 97,
-    tagline: "El que la mayoria escoge.",
+    tagline: "El que la mayoría escoge.",
     features: [
-      "Todo lo de Inicio",
+      "WhatsApp automático 24/7",
       "Agenda con calendario",
-      "Recordatorios automaticos",
-      "Hasta 3 usuarios",
-      "Reportes mensuales",
-      "Campanas basicas",
+      "Recordatorios automáticos",
+      "Soporte para hasta 3 usuarios",
+      "FAQs y captura de prospectos",
+      "Campañas básicas de difusión",
     ],
     cta: "Contratar",
     href: "https://pay.hotmart.com/R105359230P?off=43g79ufq",
     featured: true,
   },
   {
-    name: "Premium",
-    price: 149,
-    tagline: "Para negocios con sucursales.",
+    name: "Ejecutivo",
+    price: null,
+    tagline: "Para negocios con necesidades avanzadas.",
     features: [
       "Todo lo de Pro",
-      "Multiples sucursales",
+      "Conexión por API a sistemas, CRM, ERP",
+      "Múltiples sucursales",
       "Seguimiento a contactos inactivos",
       "Dashboards completos",
       "Soporte prioritario",
     ],
     cta: "Hablar con ventas",
-    href: "https://wa.me/5216741251648?text=Hola%2C%20me%20interesa%20el%20plan%20Premium%20de%20Asistto",
+    href: "https://wa.me/5216741251648?text=Hola%2C%20me%20interesa%20el%20plan%20Ejecutivo%20de%20Asistto",
     featured: false,
   },
 ];
@@ -71,7 +57,7 @@ export default function Pricing() {
               Precios honestos. <span className="text-muted">Sin letras chicas.</span>
             </h2>
             <p className="mt-6 text-cream/65 max-w-xl">
-              Todos los planes son mes a mes. Cancelas cuando quieras. La primera demo es gratis y te queda la configuracion.
+              Todos los planes son mes a mes. Cancelas cuando quieras. La primera demo es gratis y te queda la configuración.
             </p>
           </div>
         </div>
@@ -82,7 +68,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-10 flex items-center justify-center gap-4 rounded-2xl border border-mint/25 bg-mint/5 px-6 py-4"
+          className="mb-16 flex items-center justify-center gap-4 rounded-2xl border border-mint/25 bg-mint/5 px-6 py-4"
         >
           <span className="text-2xl" aria-hidden>🛡️</span>
           <div>
@@ -95,7 +81,7 @@ export default function Pricing() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
           {plans.map((p, i) => (
             <motion.div
               key={p.name}
@@ -104,16 +90,16 @@ export default function Pricing() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
               className={cn(
-                "relative rounded-3xl border p-8 lg:p-10 flex flex-col",
+                "relative rounded-3xl border flex flex-col",
                 p.featured
-                  ? "border-mint/50 bg-gradient-to-b from-mint/5 to-transparent shadow-[0_0_80px_-20px_rgba(148,229,192,0.45)]"
-                  : "border-line bg-bg-elev/40"
+                  ? "border-mint/50 bg-gradient-to-b from-mint/5 to-transparent shadow-[0_0_80px_-20px_rgba(148,229,192,0.45)] p-8 md:py-16 md:px-10"
+                  : "border-line bg-bg-elev/40 p-8 md:py-10 md:px-8"
               )}
             >
               {p.featured && (
                 <div className="absolute -top-3 left-8 inline-flex items-center gap-1.5 rounded-full bg-mint text-bg px-3 py-1 text-[10px] font-mono uppercase tracking-widest">
                   <span className="size-1 rounded-full bg-bg" aria-hidden />
-                  Mas popular
+                  Más popular
                 </div>
               )}
 
@@ -123,11 +109,19 @@ export default function Pricing() {
               </div>
               <p className="text-sm text-cream/60 mb-8">{p.tagline}</p>
 
-              <div className="flex items-baseline gap-2 mb-8">
-                <span className="font-display text-6xl font-semibold tracking-tight">
-                  ${p.price}
-                </span>
-                <span className="text-muted text-sm">USD/mes</span>
+              <div className="flex items-baseline gap-2 mb-8 min-h-[72px]">
+                {p.price !== null ? (
+                  <>
+                    <span className="font-display text-6xl font-semibold tracking-tight">
+                      ${p.price}
+                    </span>
+                    <span className="text-muted text-sm">USD/mes</span>
+                  </>
+                ) : (
+                  <span className="font-display text-4xl font-semibold tracking-tight text-cream">
+                    A la medida
+                  </span>
+                )}
               </div>
 
               <ul className="space-y-3 mb-10 flex-1">
